@@ -1,7 +1,7 @@
 #include <cassert>
 #include <sstream>
 #include <iostream>
-#include "library.cpp" // Assuming the original code is in library.h
+#include "library.h" // with the original code is in library.h
 
 // Utility function to capture cout output
 class CoutRedirect {
