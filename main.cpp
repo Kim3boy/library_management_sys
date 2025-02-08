@@ -12,7 +12,8 @@ int main() {
         std::cin >> choice;
         std::cin.ignore(); // Ignore the newline character left in the buffer
 
-        switch (choice) {
+        try {
+            switch (choice) {
             case 1: // Add Book
                 std::cout << "Enter book title: ";
                 std::getline(std::cin, title);
@@ -38,14 +39,14 @@ int main() {
                 std::getline(std::cin, title);
 
                 {
-                    User* user = library.searchUserByID(userID);
-                    Book* book = library.searchBookByTitle(title);
+                User* user = library.searchUserByID(userID);
+                Book* book = library.searchBookByTitle(title);
 
-                    if (user && book) {
-                        user->borrowBook(book);
-                    } else {
-                        std::cout << "User or book not found." << std::endl;
-                    }
+                if (user && book) {
+                    user->borrowBook(book);
+                } else {
+                    std::cout << "User or book not found." << std::endl;
+                }
                 }
                 break;
 
@@ -56,14 +57,14 @@ int main() {
                 std::getline(std::cin, title);
 
                 {
-                    User* user = library.searchUserByID(userID);
-                    Book* book = library.searchBookByTitle(title);
+                User* user = library.searchUserByID(userID);
+                Book* book = library.searchBookByTitle(title);
 
-                    if (user && book) {
-                        user->returnBook(book);
-                    } else {
-                        std::cout << "User or book not found." << std::endl;
-                    }
+                if (user && book) {
+                    user->returnBook(book);
+                } else {
+                    std::cout << "User or book not found." << std::endl;
+                }
                 }
                 break;
 
@@ -82,6 +83,11 @@ int main() {
             default:
                 std::cout << "Invalid choice. Please try again." << std::endl;
                 break;
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "An error occurred: " << e.what() << std::endl;
+        } catch (...) {
+            std::cerr << "An unknown error occurred." << std::endl;
         }
     }
 
